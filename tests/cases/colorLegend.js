@@ -201,16 +201,24 @@ describe('color legend', function () {
     container[0].dispatchEvent(CreateEvent('mouseleave'));
 
     legendWidget.categories([allCategories[1], allCategories[6]]);
-    var mousemove = CreateEvent('mousemove');
-    mousemove.pageX = 115;
-    mousemove.pageY = 574;
+    var mousemove;
+    var phantom = false;
+    try {
+      mousemove = new MouseEvent('mousemove', { ClientX: 115, ClientY: 574 });
+    }
+    catch (e) {
+      phantom = true;
+      mousemove = CreateEvent('mousemove');
+      mousemove.pageX = 115;
+      mousemove.pageY = 574;
+    }
     var mouseout = CreateEvent('mouseout');
     var legends = $(container).find('.legend');
     $(legends[0]).find('svg>rect')[0].dispatchEvent(mousemove);
     $(legends[0]).find('svg>rect')[0].dispatchEvent(mouseout);
     expect($(container).find('.color-legend-popup').text()).toBe('100 - 200');
     $(legends[1]).find('svg>rect')[0].dispatchEvent(mousemove);
-    expect($(container).find('.color-legend-popup').text()).toBe('46');
+    expect($(container).find('.color-legend-popup').text()).toBe('45');
     $(legends[1]).find('svg>rect')[0].dispatchEvent(mouseout);
   });
 });
