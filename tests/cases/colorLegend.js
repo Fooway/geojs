@@ -218,7 +218,7 @@ describe('color legend', function () {
     $(legends[0]).find('svg>rect')[0].dispatchEvent(mouseout);
     expect($(container).find('.color-legend-popup').text()).toBe('100 - 200');
     $(legends[1]).find('svg>rect')[0].dispatchEvent(mousemove);
-    expect($(container).find('.color-legend-popup').text()).toBe('45');
+    expect($(container).find('.color-legend-popup').text()).toBe('46');
     $(legends[1]).find('svg>rect')[0].dispatchEvent(mouseout);
   });
 });
